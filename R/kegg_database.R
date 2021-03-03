@@ -150,8 +150,9 @@ get_kegg_compound <-
 get_kegg_pathway <- function(local = TRUE,
                              organism = "hsa",
                              threads = 3) {
+  organism = match.arg(organism)
   if (local) {
-    if (organism == "organism") {
+    if (organism == "hsa") {
       data("kegg_hsa_pathway", envir = environment())
       message(
         crayon::yellow(
