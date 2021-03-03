@@ -1,0 +1,11 @@
+pandoc: 2.11.4
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  contact_us: contact_us.html
+  metPath: metPath.html
+last_built: 2021-03-03T08:02Z
+urls:
+  reference: https://jaspershen.github.io/metPath//reference
+  article: https://jaspershen.github.io/metPath//articles
+

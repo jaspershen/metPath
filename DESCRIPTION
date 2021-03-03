@@ -1,0 +1,89 @@
+Package: metPath
+Type: Package
+Title: Pathway analysis for metabolomics data
+Version: 0.0.9
+Authors@R: c(
+    person(given = "Xiaotao",
+           family = "Shen",
+           role = c("aut", "cre"),
+           email = "shenxt@stanford.edu",
+           comment = c(ORCID = "0000-0002-9608-9964")),
+        person(given = "Chuchu",
+           family = "Wang",
+           role = c("aut", "ctb"))
+           )
+Maintainer: Xiaotao Shen <shenxt@stanford.edu>
+Description: This package is used to do statistical data analysis for and pathway enrichment analysi for metabolomics data.
+URL: https://github.com/jaspershen/metPath
+BugReports: https://github.com/jaspershen/metPath/issues
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.5)
+Imports:
+    BiocParallel,
+    cli,
+    crayon,
+    clisymbols,
+    dplyr,
+    faahKO,
+    ggplot2,
+    ggsci,
+    ggfortify,
+    graphics,
+    grDevices,
+    pcaMethods,
+    httr,
+    impute,
+    missForest,
+    magrittr,
+    scatterplot3d,
+    pbapply,
+    pheatmap,
+    plyr,
+    purrr,
+    beeswarm,
+    ellipse,
+    patchwork,
+    pls,
+    plsdepot,
+    pROC,
+    e1071,
+    snow,
+    methods,
+    MSnbase,
+    mzR,
+    pander,
+    utils,
+    rvest,
+    stats,
+    readr,
+    readxl,
+    RColorBrewer,
+    plotly,
+    stringr,
+    tibble,
+    tidyr,
+    tidyverse,
+    xml2,
+    webchem,
+    KEGGREST,
+    metID (>= 0.9.0),
+    future,
+    furrr,
+    openxlsx,
+    rstudioapi,
+    htmltools,
+    leaflet,
+    htmlwidgets
+License: GPL-2 | file LICENSE
+RoxygenNote: 7.1.1
+Suggests: knitr,
+    rmarkdown,
+    BiocStyle,
+    RUnit,
+    BiocGenerics
+VignetteBuilder: knitr
+Note:
+biocViews: Metabolomics, MassSpectrometry, Data processing, Data analysis.
+Remotes: 
+    jaspershen/metID
