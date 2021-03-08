@@ -74,7 +74,10 @@ Imports:
     rstudioapi,
     htmltools,
     leaflet,
-    htmlwidgets
+    htmlwidgets,
+    ggraph,
+    ggrepel,
+    tidygraph
 License: GPL-2 | file LICENSE
 RoxygenNote: 7.1.1
 Suggests: knitr,

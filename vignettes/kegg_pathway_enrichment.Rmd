@@ -1,0 +1,22 @@
+---
+title: "KEGG pathway enrichment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{kegg_pathway_enrichment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(metPath)
+```
+
+
+

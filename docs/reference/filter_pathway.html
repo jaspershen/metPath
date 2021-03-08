@@ -111,30 +111,16 @@
     <li>
       <a href="../articles/metPath.html">Brief introduction of metPath</a>
     </li>
-    <li>
-      <a href="../articles/overview_of_metPath.html">Overview of workflow of metPath</a>
-    </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Absolute quantification of lipids</li>
     <li>
-      <a href="../articles/get_is_retention_time.html">Step 1: get internal standard retention time</a>
-    </li>
-    <li>
-      <a href="../articles/is_relative_quantification.html">Step 2: get relative quantification data</a>
-    </li>
-    <li>
-      <a href="../articles/absolute_quantification.html">Step 3: get absolute quantification data</a>
-    </li>
-    <li>
-      <a href="../articles/output_result.html">Step 4: output and organize results</a>
+      <a href="../articles/pathway_database.html">Pathways and metabolite sets in metPath</a>
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../articles/one_step_of_metPath.html">One function to all steps</a>
+      <a href="../articles/hmdb_pathway_enrichment.html">HMDB pathway enrichment</a>
     </li>
-    <li class="dropdown-header">Other tools in metPath</li>
     <li>
-      <a href="../articles/metPath.html">Other tools in metPath</a>
+      <a href="../articles/kegg_pathway_enrichment.html">KEGG pathway enrichment</a>
     </li>
   </ul>
 </li>
@@ -201,7 +187,7 @@
     <p>filter pathways according to pathway class</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filter_pathway</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>class</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>filter_pathway</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>class</span>, <span class='va'>remain_idx</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,6 +199,10 @@
     <tr>
       <th>class</th>
       <td><p>class pathway class you want to remain.</p></td>
+    </tr>
+    <tr>
+      <th>remain_idx</th>
+      <td><p>Which pathways you want to remain (remain_idx).</p></td>
     </tr>
     </table>
 

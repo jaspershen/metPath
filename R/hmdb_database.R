@@ -26,6 +26,25 @@ get_hmdb_compound <- function(
 #' \email{shenxt@@stanford.edu}
 #' @param threads threads
 #' @export
+# load("data/hmdb_pathway.rda")
+# load("data/primary_pathway")
+# 
+# idx = match(primary_pathway, hmdb_pathway@pathway_id)
+# idx = idx[!is.na(idx)]
+# pathway_class =
+#   hmdb_pathway@pathway_class
+# 
+# for(x in idx){
+#   pathway_class[[x]] = paste(pathway_class[[x]], "primary_pathway", sep = ";")
+# }
+# 
+# 
+# 
+# pathway_class[idx]
+# 
+# hmdb_pathway@pathway_class = pathway_class
+# 
+# save(hmdb_pathway, file = "data/hmdb_pathway.rda", )
 
 get_hmdb_pathway <- function(threads = 3) {
   data("hmdb_pathway", envir = environment())

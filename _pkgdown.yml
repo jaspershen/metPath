@@ -43,24 +43,14 @@ navbar:
       - text: "Brief introduction"
       - text: "Brief introduction of metPath"
         href: articles/metPath.html
-      - text: "Overview of workflow of metPath"
-        href: articles/overview_of_metPath.html
       - text: -------
-      - text: "Absolute quantification of lipids"
-      - text: "Step 1: get internal standard retention time"
-        href: articles/get_is_retention_time.html
-      - text: "Step 2: get relative quantification data"
-        href: articles/is_relative_quantification.html
-      - text: "Step 3: get absolute quantification data"
-        href: articles/absolute_quantification.html
-      - text: "Step 4: output and organize results"
-        href: articles/output_result.html
+      - text: "Pathways and metabolite sets in metPath"
+        href: articles/pathway_database.html
       - text: -------
-      - text: "One function to all steps"
-        href: articles/one_step_of_metPath.html
-      - text: "Other tools in metPath"
-      - text: "Other tools in metPath"
-        href: articles/metPath.html
+      - text: "HMDB pathway enrichment"
+        href: articles/hmdb_pathway_enrichment.html
+      - text: "KEGG pathway enrichment"
+        href: articles/kegg_pathway_enrichment.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/JasperShen1990

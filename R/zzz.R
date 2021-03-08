@@ -48,6 +48,14 @@ globalVariables(
     "n",
     "name",
     ".",
-    "hmdbMS1Database"
+    "hmdbMS1Database",
+    "x_value",
+    "x",
+    "pathway_name",
+    "mapped_id",
+    "jaccard_index",
+    "geom_node_text",
+    "y",
+    ""
   )
 )

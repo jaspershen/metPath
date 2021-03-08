@@ -1,2 +1,14 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+summary
+demo_data
+example
+
+LICENSE.md
+
+NewFile.txt
+
+docs
+
+_pkgdown.yml

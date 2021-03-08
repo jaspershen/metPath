@@ -4,12 +4,14 @@
 \alias{filter_pathway}
 \title{filter_pathway}
 \usage{
-filter_pathway(object, class)
+filter_pathway(object, class, remain_idx)
 }
 \arguments{
 \item{object}{pathway_class object.}
 
 \item{class}{class pathway class you want to remain.}
+
+\item{remain_idx}{Which pathways you want to remain (remain_idx).}
 }
 \description{
 filter pathways according to pathway class

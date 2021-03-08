@@ -29,3 +29,22 @@
 #' \email{shenxt1990@@163.com}
 #' @format hmdb_pathway
 "hmdb_pathway"
+
+
+##------------------------------------------------------------------------------
+#' @title query_id_hmdb
+#' @description query_id_hmdb
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @format query_id_hmdb
+"query_id_hmdb"
+
+##------------------------------------------------------------------------------
+#' @title query_id_kegg
+#' @description query_id_kegg
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @format query_id_kegg
+"query_id_kegg"
+
+

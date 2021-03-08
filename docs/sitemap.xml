@@ -4,13 +4,25 @@
     <loc>https://jaspershen.github.io/metPath//index.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/calculate_redundance.html</loc>
-  </url>
-  <url>
     <loc>https://jaspershen.github.io/metPath//reference/creatMetPathObject.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/enrich_pathway.html</loc>
+    <loc>https://jaspershen.github.io/metPath//reference/enrich_bar_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//reference/enrich_hmdb.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//reference/enrich_kegg.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//reference/enrich_network.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//reference/enrich_result_class-class.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//reference/enrich_scatter_plot.html</loc>
   </url>
   <url>
     <loc>https://jaspershen.github.io/metPath//reference/filter_pathway.html</loc>
@@ -28,7 +40,7 @@
     <loc>https://jaspershen.github.io/metPath//reference/get_kegg_pathway.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/group_peaks_rt.html</loc>
+    <loc>https://jaspershen.github.io/metPath//reference/get_pathway_class.html</loc>
   </url>
   <url>
     <loc>https://jaspershen.github.io/metPath//reference/hmdbMS1Database.html</loc>
@@ -55,15 +67,27 @@
     <loc>https://jaspershen.github.io/metPath//reference/pathway_class-class.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/score_peak_group.html</loc>
+    <loc>https://jaspershen.github.io/metPath//reference/query_id_hmdb.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/setlabel.html</loc>
+    <loc>https://jaspershen.github.io/metPath//reference/query_id_kegg.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//reference/set_label.html</loc>
   </url>
   <url>
     <loc>https://jaspershen.github.io/metPath//articles/contact_us.html</loc>
   </url>
   <url>
+    <loc>https://jaspershen.github.io/metPath//articles/hmdb_pathway_enrichment.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//articles/kegg_pathway_enrichment.html</loc>
+  </url>
+  <url>
     <loc>https://jaspershen.github.io/metPath//articles/metPath.html</loc>
+  </url>
+  <url>
+    <loc>https://jaspershen.github.io/metPath//articles/pathway_databaseRmd.html</loc>
   </url>
 </urlset>
