@@ -1,9 +1,9 @@
-##S4 class for pathway
 #' An S4 class to represent pathways
 #'
 #' @slot pathway_database pathway_database
 #' @slot pathway_version pathway_version
 #' @slot result result
+#' @exportClass enrich_result_class
 
 setClass(
   Class = "enrich_result_class",
@@ -18,7 +18,6 @@ setClass(
     result = data.frame()
   )
 )
-
 
 setMethod(
   f = "show",

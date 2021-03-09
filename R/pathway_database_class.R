@@ -1,4 +1,3 @@
-##S4 class for pathway
 #' An S4 class to represent pathways
 #'
 #' @slot database_info database_info
@@ -12,6 +11,7 @@
 #' @slot reference_list reference_list
 #' @slot related_disease related_disease
 #' @slot related_module related_module
+#' @exportClass pathway_database_class
 
 setClass(
   Class = "pathway_database_class",
@@ -43,7 +43,6 @@ setClass(
   )
 )
 
-
 setMethod(
   f = "show",
   signature = "pathway_database_class",
@@ -63,7 +62,7 @@ setMethod(
           unlist() %>%
           `!=`(0) %>%
           sum(),
-        "pathways haves genes",
+        "pathways have genes",
         "\n"
       )
     )
@@ -75,7 +74,7 @@ setMethod(
           unlist() %>%
           `!=`(0) %>%
           sum(),
-        "pathways haves proteins",
+        "pathways have proteins",
         "\n"
       )
     )
@@ -87,7 +86,7 @@ setMethod(
           unlist() %>%
           `!=`(0) %>%
           sum(),
-        "pathways haves compounds",
+        "pathways have compounds",
         "\n"
       )
     )
@@ -116,6 +115,10 @@ filter_pathway =
   function(object,
            class,
            remain_idx) {
+    if (base::class(object) != "pathway_database_class"){
+      stop(crayon::red('Only for pathway_database_class object.\n'))
+    }
+    
     if (missing(class) & missing(remain_idx)) {
       stop("Provide class or remain_idx.\n")
     }

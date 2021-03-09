@@ -58,12 +58,27 @@ data("query_id_kegg", package = "metPath")
 query_id_kegg
 ```
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+Remove the disease pathways:
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+remain_idx =
+  kegg_hsa_pathway@pathway_class %>%
+  unlist() %>%
+  stringr::str_detect("Disease") %>%
+  `!`() %>%
+  which()
+
+pathway_database =
+  filter_pathway(object = kegg_hsa_pathway, remain_idx = remain_idx)
+```
+
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 result = 
 enrich_kegg(query_id = query_id_kegg, 
             query_type = "compound", 
             id_type = "KEGG",
-            pathway_database = kegg_hsa_pathway, 
+            pathway_database = pathway_database, 
             p_cutoff = 0.05, 
             p_adjust_method = "BH", 
             threads = 3)
@@ -71,21 +86,21 @@ enrich_kegg(query_id = query_id_kegg,
 
 Check the result:
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 result
 ```
 
 
 ## **Plot to show Pathway enrichment**
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_bar_plot(object = result)
 ```
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_scatter_plot(object = result)
 ```
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_network(object = result)
 ```

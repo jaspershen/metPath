@@ -1,12 +1,11 @@
 #' @title enrich_kegg
-#' @description Pathway enrichment for metabolomics.
+#' @description Pathway enrichment for SMPDB database.
 #' @author Xiaotao Shen
 #' \email{shenxt@@sioc.ac.cn}
 #' @param query_id The vector of query IDs.
 #' @param query_type "compound" or "gene"
 #' @param id_type HMDB
 #' @param pathway_database KEGG or other metabolomics pathway database.
-#' @param only_primary_pathway only_primary_pathway
 #' @param p_cutoff p_cutoff
 #' @param p_adjust_method p_adjust_method
 #' @param method Hypergeometric or fisher test.
@@ -14,53 +13,42 @@
 #' @return  The MSE analysis result.
 #' @export
 
-# load("data/hmdb_pathway.rda")
+# load("data/kegg_hsa_pathway.rda")
 # 
-# get_pathway_class(object = hmdb_pathway)
+# get_pathway_class(object = kegg_hsa_pathway)
+# 
+# remain_idx =
+#   kegg_hsa_pathway@pathway_class %>%
+#   unlist() %>%
+#   stringr::str_detect("Disease") %>%
+#   `!`() %>%
+#   which()
 # 
 # pathway_database =
-#   filter_pathway(object = hmdb_pathway, class = "Metabolic;primary_pathway")
+#   filter_pathway(object = kegg_hsa_pathway, remain_idx = remain_idx)
 # 
-# query_id_hmdb = c(
-#   "HMDB0000060",
-#   "HMDB0000056",
-#   "HMDB0000064",
-#   "HMDB0000092",
-#   "HMDB0000134",
-#   "HMDB0000123",
-#   "HMDB0000742",
-#   "HMDB0000574",
-#   "HMDB0000159",
-#   "HMDB0000187",
-#   "HMDB0000167",
-#   "HMDB0000158",
-#   "HMDB0000883",
-#   "HMDB0000205",
-#   "HMDB0000237",
-#   "HMDB0000243",
-#   "HMDB0000271"
-# )
+# load("data/query_id_kegg.rda")
 # 
-# hmdb_enrichment =
-#   enrich_hmdb(
+# kegg_enrichment =
+#   enrich_kegg(
 #     query_id = query_id,
 #     query_type = "compound",
-#     id_type = "HMDB",
+#     id_type = "KEGG",
 #     pathway_database = pathway_database,
-#     only_primary_pathway = TRUE,
 #     p_cutoff = 0.05,
 #     p_adjust_method = "BH",
 #     method = "hypergeometric",
 #     threads = 5
 #   )
 # 
-# hmdb_enrichment@result$pathway_name
+# enrich_bar_plot(object = kegg_enrichment)
+# enrich_scatter_plot(object = kegg_enrichment)
+# enrich_network(object = kegg_enrichment)
 
-enrich_hmdb = function(query_id,
-                       query_type = c("compound", "protein"),
-                       id_type = c("HMDB"),
+enrich_kegg = function(query_id,
+                       query_type = c("compound", "gene"),
+                       id_type = c("KEGG"),
                        pathway_database,
-                       only_primary_pathway = TRUE,
                        p_cutoff = 0.05,
                        p_adjust_method = c("holm",
                                            "hochberg",
@@ -78,8 +66,8 @@ enrich_hmdb = function(query_id,
   p_adjust_method = match.arg(p_adjust_method)
   
   if (query_type == "compound") {
-    if (pathway_database@database_info$source != "SMPDB") {
-      stop("pathway_database must from SMPDB.\n")
+    if (pathway_database@database_info$source != "KEGG") {
+      stop("pathway_database must from KEGG.\n")
     }
     
     remain_idx =
@@ -97,28 +85,8 @@ enrich_hmdb = function(query_id,
     for (i in 1:length(pathway_database@pathway_id)) {
       pathway_database@compound_list[[i]] =
         pathway_database@compound_list[[i]] %>%
-        dplyr::filter(!is.na(HMDB.ID)) %>%
-        dplyr::filter(HMDB.ID != "")
-    }
-    
-    ##only remain primary class pathway
-    if (only_primary_pathway) {
-      remain_idx =
-        pathway_database@pathway_class %>%
-        purrr::map(function(x) {
-          stringr::str_detect(x, "primary_pathway")
-        }) %>%
-        unlist() %>%
-        which()
-      if (length(remain_idx) == 0) {
-        stop(
-          "No pathways left if you set 'only_primary_pathway' as TRUE.
-             Try to set 'only_primary_pathway' as FALSE.\n"
-        )
-      }
-      
-      pathway_database =
-        filter_pathway(object = pathway_database, remain_idx = remain_idx)
+        dplyr::filter(!is.na(KEGG.ID)) %>%
+        dplyr::filter(KEGG.ID != "")
     }
     
     ##remove pathways without compound
@@ -142,11 +110,20 @@ enrich_hmdb = function(query_id,
     
     database = pathway_database@compound_list
     names(database) = pathway_database@pathway_id
+    
     database =
       database %>%
       purrr::map(function(x) {
-        x$HMDB.ID
+        x$KEGG.ID
       })
+    
+    for(idx in 1:length(pathway_database@describtion)){
+      if(is.null(pathway_database@describtion[[idx]])){
+        pathway_database@describtion[[idx]] = NA
+      }
+      pathway_database@describtion[[idx]] = 
+        paste(pathway_database@describtion[[idx]], collapse = "{}")
+    }
     
     pathway_info = data.frame(
       pathway_id = pathway_database@pathway_id,

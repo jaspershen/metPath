@@ -207,29 +207,49 @@
 <span class="co">#&gt;  [1] "C00164" "C00099" "C00300" "C01026" "C00122" "C00037" "C05330" "C00097"</span>
 <span class="co">#&gt;  [9] "C00079" "C00065" "C00188" "C00082" "C00183" "C00166" "C00163" "C00022"</span>
 <span class="co">#&gt; [17] "C00213"</span></code></pre></div>
+<p>Remove the disease pathways:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">remain_idx</span> <span class="op">=</span>
+  <span class="va">kegg_hsa_pathway</span><span class="op">@</span><span class="va">pathway_class</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">`!`</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">pathway_database</span> <span class="op">=</span>
+  <span class="fu"><a href="../reference/filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">kegg_hsa_pathway</span>, remain_idx <span class="op">=</span> <span class="va">remain_idx</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">=</span> 
 <span class="fu"><a href="../reference/enrich_kegg.html">enrich_kegg</a></span><span class="op">(</span>query_id <span class="op">=</span> <span class="va">query_id_kegg</span>, 
             query_type <span class="op">=</span> <span class="st">"compound"</span>, 
             id_type <span class="op">=</span> <span class="st">"KEGG"</span>,
-            pathway_database <span class="op">=</span> <span class="va">kegg_hsa_pathway</span>, 
+            pathway_database <span class="op">=</span> <span class="va">pathway_database</span>, 
             p_cutoff <span class="op">=</span> <span class="fl">0.05</span>, 
             p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>, 
             threads <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>Check the result:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result</span>
+<span class="co">#&gt; ---------Pathway database&amp;version---------</span>
+<span class="co">#&gt; KEGG &amp; 2021-03-02 </span>
+<span class="co">#&gt; -----------Enrichment result------------</span>
+<span class="co">#&gt; 195 pathways are enriched </span>
+<span class="co">#&gt; 28 pathways p-values &lt; 0.05 </span>
+<span class="co">#&gt; Glycolysis / Gluconeogenesis;Citrate cycle (TCA cycle);Pentose phosphate pathway;Pentose and glucuronate interconversions;Fructose and mannose metabolism ... (only top 5 shows)</span></code></pre></div>
 </div>
 <div id="plot-to-show-pathway-enrichment" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plot-to-show-pathway-enrichment" class="anchor"></a><strong>Plot to show Pathway enrichment</strong>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_bar_plot.html">enrich_bar_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_scatter_plot.html">enrich_scatter_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_bar_plot.html">enrich_bar_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="kegg_pathway_enrichment_files/figure-html/unnamed-chunk-9-1.png" width="100%"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_scatter_plot.html">enrich_scatter_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="kegg_pathway_enrichment_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/enrich_network.html">enrich_network</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="kegg_pathway_enrichment_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 </div>
   </div>
 
