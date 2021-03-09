@@ -284,7 +284,7 @@ get_kegg_pathway <- function(local = TRUE,
 
     pathway =
       new(
-        Class = "pathway_class",
+        Class = "pathway_database_class",
         database_info = list(source = "KEGG",
                              version = as.character(Sys.Date())),
         pathway_id = pathway_id,

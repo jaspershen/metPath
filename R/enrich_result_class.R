@@ -32,6 +32,8 @@ setMethod(
     }
     cat(crayon::green("-----------Enrichment result------------\n"))
     cat(crayon::green(nrow(object@result), "pathways are enriched", "\n"))
+    cat(crayon::green(nrow(object@result %>% 
+                             dplyr::filter(p_value < 0.05)), "pathways p-values < 0.05", "\n"))
     if (nrow(object@result) > 0) {
       if (nrow(object@result) > 5) {
         pathway_name = object@result$pathway_name[1:5]
@@ -338,7 +340,7 @@ enrich_network = function(object,
   if (label) {
     plot =
       plot +
-      geom_node_text(
+      ggraph::geom_node_text(
         aes(
           x = x,
           y = y,

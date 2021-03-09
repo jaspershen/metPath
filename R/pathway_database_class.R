@@ -1,12 +1,20 @@
 ##S4 class for pathway
 #' An S4 class to represent pathways
 #'
-#' @slot database.info Database information.
-#' @slot spectra.info Metabolites in database.
-#' @slot spectra.data MS2 spectra data.
+#' @slot database_info database_info
+#' @slot pathway_id pathway_id
+#' @slot pathway_name pathway_name
+#' @slot describtion describtion
+#' @slot pathway_class pathway_class
+#' @slot gene_list gene_list
+#' @slot compound_list compound_list
+#' @slot protein_list protein_list
+#' @slot reference_list reference_list
+#' @slot related_disease related_disease
+#' @slot related_module related_module
 
 setClass(
-  Class = "pathway_class",
+  Class = "pathway_database_class",
   representation(
     database_info = "list",
     pathway_id = "vector",
@@ -38,7 +46,7 @@ setClass(
 
 setMethod(
   f = "show",
-  signature = "pathway_class",
+  signature = "pathway_database_class",
   definition = function(object) {
     version <- try(object@database_info$version, silent = TRUE)
     source <- try(object@database_info$source, silent = TRUE)
@@ -99,7 +107,7 @@ setMethod(
 #' @description filter pathways according to pathway class
 #' @author Xiaotao Shen
 #' \email{shenxt@@stanford.edu}
-#' @param object pathway_class object.
+#' @param object pathway_database_class object.
 #' @param class class pathway class you want to remain.
 #' @param remain_idx Which pathways you want to remain (remain_idx).
 #' @export

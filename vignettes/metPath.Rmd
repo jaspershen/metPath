@@ -1,16 +1,29 @@
 ---
 title: "metPath"
-output: rmarkdown::html_vignette
+author:
+- name: Xiaotao Shen PhD (https://www.shenxt.info/)
+- affiliation: School of Medicine, Stanford University
+  url: http://shenxt.info/
+date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
 vignette: >
   %\VignetteIndexEntry{metPath}
+  %\VignettePackage{metPath}
   %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
 ```
 

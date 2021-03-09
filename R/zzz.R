@@ -56,6 +56,6 @@ globalVariables(
     "jaccard_index",
     "geom_node_text",
     "y",
-    ""
+    "p_value"
   )
 )

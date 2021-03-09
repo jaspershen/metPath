@@ -4,9 +4,6 @@
     <loc>https://jaspershen.github.io/metPath//index.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/creatMetPathObject.html</loc>
-  </url>
-  <url>
     <loc>https://jaspershen.github.io/metPath//reference/enrich_bar_plot.html</loc>
   </url>
   <url>
@@ -55,16 +52,13 @@
     <loc>https://jaspershen.github.io/metPath//reference/kegg_hsa_pathway.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/metPathClass-class.html</loc>
-  </url>
-  <url>
     <loc>https://jaspershen.github.io/metPath//reference/metPath_logo.html</loc>
   </url>
   <url>
     <loc>https://jaspershen.github.io/metPath//reference/metPath_packages.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//reference/pathway_class-class.html</loc>
+    <loc>https://jaspershen.github.io/metPath//reference/pathway_database_class-class.html</loc>
   </url>
   <url>
     <loc>https://jaspershen.github.io/metPath//reference/query_id_hmdb.html</loc>
@@ -88,6 +82,6 @@
     <loc>https://jaspershen.github.io/metPath//articles/metPath.html</loc>
   </url>
   <url>
-    <loc>https://jaspershen.github.io/metPath//articles/pathway_databaseRmd.html</loc>
+    <loc>https://jaspershen.github.io/metPath//articles/pathways_database.html</loc>
   </url>
 </urlset>

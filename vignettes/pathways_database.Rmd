@@ -1,5 +1,5 @@
 ---
-title: "HMDB pathway enrichment"
+title: "Pathways and metabolite sets in metPath"
 author:
 - name: Xiaotao Shen PhD (https://www.shenxt.info/)
 - affiliation: School of Medicine, Stanford University
@@ -12,7 +12,7 @@ output:
   pdf_document:
     toc: no
 vignette: >
-  %\VignetteIndexEntry{HMDB pathway enrichment}
+  %\VignetteIndexEntry{Pathways and metabolite sets in metPath}
   %\VignettePackage{metPath}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
@@ -26,7 +26,6 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
 
 ```{r setup}
 library(metPath)

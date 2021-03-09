@@ -12,3 +12,6 @@ NewFile.txt
 docs
 
 _pkgdown.yml
+
+vignettes
+vignettes/*_cache
