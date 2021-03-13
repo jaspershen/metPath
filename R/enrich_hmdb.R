@@ -43,10 +43,10 @@
 # 
 # hmdb_enrichment =
 #   enrich_hmdb(
-#     query_id = query_id,
+#     query_id = query_id_hmdb,
 #     query_type = "compound",
 #     id_type = "HMDB",
-#     pathway_database = pathway_database,
+#     pathway_database = hmdb_pathway,
 #     only_primary_pathway = TRUE,
 #     p_cutoff = 0.05,
 #     p_adjust_method = "BH",
@@ -94,13 +94,6 @@ enrich_hmdb = function(query_id,
     pathway_database =
       filter_pathway(object = pathway_database, remain_idx = remain_idx)
     
-    for (i in 1:length(pathway_database@pathway_id)) {
-      pathway_database@compound_list[[i]] =
-        pathway_database@compound_list[[i]] %>%
-        dplyr::filter(!is.na(HMDB.ID)) %>%
-        dplyr::filter(HMDB.ID != "")
-    }
-    
     ##only remain primary class pathway
     if (only_primary_pathway) {
       remain_idx =
@@ -119,6 +112,13 @@ enrich_hmdb = function(query_id,
       
       pathway_database =
         filter_pathway(object = pathway_database, remain_idx = remain_idx)
+    }
+    
+    for (i in 1:length(pathway_database@pathway_id)) {
+      pathway_database@compound_list[[i]] =
+        pathway_database@compound_list[[i]] %>%
+        dplyr::filter(!is.na(HMDB.ID)) %>%
+        dplyr::filter(HMDB.ID != "")
     }
     
     ##remove pathways without compound
@@ -318,6 +318,29 @@ enrich_hmdb = function(query_id,
   #   result %>%
   #   dplyr::arrange(p_value) %>%
   #   dplyr::filter(p_value <= p_cutoff)
+  
+  ##remove the duplicated pathways
+  result = 
+  result %>% 
+    plyr::dlply(.variables = plyr::.(pathway_name)) %>% 
+    purrr::map(function(x){
+      if(nrow(x) == 1){
+        return(x)
+      }else{
+        x = 
+        x %>% 
+          dplyr::filter(p_value_adjust == min(p_value_adjust)) %>% 
+          dplyr::filter(mapped_number == max(mapped_number)) %>% 
+          dplyr::filter(all_number == max(all_number))
+        x[1,,drop = FALSE]
+      }
+    }) %>% 
+    do.call(rbind, .) %>% 
+    as.data.frame()
+  
+  result =
+    result %>%
+    dplyr::arrange(p_value_adjust)
   
   return_result =
     new(

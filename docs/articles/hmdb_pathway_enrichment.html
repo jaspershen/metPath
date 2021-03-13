@@ -133,7 +133,7 @@
                         <h4 class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
                                     <h4 class="author">true</h4>
             
-            <h4 class="date">Created on 2020-03-28 and updated on 2021-03-09</h4>
+            <h4 class="date">Created on 2020-03-28 and updated on 2021-03-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jaspershen/metPath/blob/master/vignettes/hmdb_pathway_enrichment.Rmd"><code>vignettes/hmdb_pathway_enrichment.Rmd</code></a></small>
       <div class="hidden name"><code>hmdb_pathway_enrichment.Rmd</code></div>
@@ -143,24 +143,98 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jaspershen/metPath">metPath</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning in fun(libname, pkgname): mzR has been built against a different Rcpp version (1.0.5)</span>
-<span class="co">#&gt; than is installed on your system (1.0.6). This might lead to errors</span>
-<span class="co">#&gt; when loading mzR. If you encounter such issues, please send a report,</span>
-<span class="co">#&gt; including the output of sessionInfo() to the Bioc support forum at </span>
-<span class="co">#&gt; https://support.bioconductor.org/. For details see also</span>
-<span class="co">#&gt; https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span>
-<span class="co">#&gt; ✓ metID 0.9.0</span>
-<span class="co">#&gt; metPath,</span>
-<span class="co">#&gt; More information can be found at https://jaspershen.github.io/metPath/</span>
-<span class="co">#&gt; Authors: Xiaotao Shen (shenxt@stanford.edu)</span>
-<span class="co">#&gt; Maintainer: Xiaotao Shen.</span>
-<span class="co">#&gt; Version 0.0.9 (20200406)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jaspershen/metPath">metPath</a></span><span class="op">)</span></code></pre></div>
+<div id="load-hmdb-pathway-database" class="section level2">
+<h2 class="hasAnchor">
+<a href="#load-hmdb-pathway-database" class="anchor"></a><strong>Load HMDB pathway database</strong>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmdb_pathway"</span>, package <span class="op">=</span> <span class="st">"metPath"</span><span class="op">)</span>
+<span class="va">hmdb_pathway</span>
+<span class="co">#&gt; ---------Pathway source&amp;version---------</span>
+<span class="co">#&gt; SMPDB &amp; 2021-03-02 </span>
+<span class="co">#&gt; -----------Pathway information------------</span>
+<span class="co">#&gt; 48703 pathways </span>
+<span class="co">#&gt; 0 pathways have genes </span>
+<span class="co">#&gt; 48642 pathways have proteins </span>
+<span class="co">#&gt; 48674 pathways have compounds </span>
+<span class="co">#&gt; Pathway class: Metabolic;primary_pathway;Disease;primary_pathway;Drug Action;primary_pathway;Physiological;Physiological;primary_pathway;Drug Action;Signaling;primary_pathway;Protein;primary_pathway;Drug Metabolism;primary_pathway;Metabolic;Disease;Signaling</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_pathway_class.html">get_pathway_class</a></span><span class="op">(</span><span class="va">hmdb_pathway</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 12 x 2</span>
+<span class="co">#&gt;    class                               n</span>
+<span class="co">#&gt;  * &lt;chr&gt;                           &lt;int&gt;</span>
+<span class="co">#&gt;  1 Disease                         20016</span>
+<span class="co">#&gt;  2 Disease;primary_pathway           232</span>
+<span class="co">#&gt;  3 Drug Action                         1</span>
+<span class="co">#&gt;  4 Drug Action;primary_pathway       403</span>
+<span class="co">#&gt;  5 Drug Metabolism;primary_pathway    64</span>
+<span class="co">#&gt;  6 Metabolic                       27777</span>
+<span class="co">#&gt;  7 Metabolic;primary_pathway         105</span>
+<span class="co">#&gt;  8 Physiological                       2</span>
+<span class="co">#&gt;  9 Physiological;primary_pathway      14</span>
+<span class="co">#&gt; 10 Protein;primary_pathway            76</span>
+<span class="co">#&gt; 11 Signaling                           1</span>
+<span class="co">#&gt; 12 Signaling;primary_pathway          12</span></code></pre></div>
+</div>
+<div id="pathway-enrichment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pathway-enrichment" class="anchor"></a><strong>Pathway enrichment</strong>
+</h2>
+<p>We use the demo compound list from <code>metPath</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"query_id_hmdb"</span>, package <span class="op">=</span> <span class="st">"metPath"</span><span class="op">)</span>
+<span class="va">query_id_hmdb</span>
+<span class="co">#&gt;  [1] "HMDB0000060" "HMDB0000056" "HMDB0000064" "HMDB0000092" "HMDB0000134"</span>
+<span class="co">#&gt;  [6] "HMDB0000123" "HMDB0000742" "HMDB0000574" "HMDB0000159" "HMDB0000187"</span>
+<span class="co">#&gt; [11] "HMDB0000167" "HMDB0000158" "HMDB0000883" "HMDB0000205" "HMDB0000237"</span>
+<span class="co">#&gt; [16] "HMDB0000243" "HMDB0000271"</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result</span> <span class="op">=</span> 
+<span class="fu"><a href="../reference/enrich_hmdb.html">enrich_hmdb</a></span><span class="op">(</span>query_id <span class="op">=</span> <span class="va">query_id_hmdb</span>, 
+            query_type <span class="op">=</span> <span class="st">"compound"</span>, 
+            id_type <span class="op">=</span> <span class="st">"HMDB"</span>,
+            pathway_database <span class="op">=</span> <span class="va">hmdb_pathway</span>,
+            only_primary_pathway <span class="op">=</span> <span class="cn">TRUE</span>,
+            p_cutoff <span class="op">=</span> <span class="fl">0.05</span>, 
+            p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>, 
+            threads <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<p>Check the result:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">result</span>
+<span class="co">#&gt; ---------Pathway database&amp;version---------</span>
+<span class="co">#&gt; SMPDB &amp; 2021-03-02 </span>
+<span class="co">#&gt; -----------Enrichment result------------</span>
+<span class="co">#&gt; 874 pathways are enriched </span>
+<span class="co">#&gt; 121 pathways p-values &lt; 0.05 </span>
+<span class="co">#&gt; 3-Phosphoglycerate Dehydrogenase Deficiency;Dihydropyrimidine Dehydrogenase Deficiency (DHPD);Dimethylglycine Dehydrogenase Deficiency;Glycine and Serine Metabolism;Hyperglycinemia, Non-Ketotic ... (only top 5 shows)</span></code></pre></div>
+</div>
+<div id="plot-to-show-pathway-enrichment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plot-to-show-pathway-enrichment" class="anchor"></a><strong>Plot to show Pathway enrichment</strong>
+</h2>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_bar_plot.html">enrich_bar_plot</a></span><span class="op">(</span>
+  object <span class="op">=</span> <span class="va">result</span>,
+  x_axis <span class="op">=</span> <span class="st">"p_value_adjust"</span>,
+  cutoff <span class="op">=</span> <span class="fl">0.05</span>,
+  top <span class="op">=</span> <span class="fl">10</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="hmdb_pathway_enrichment_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_scatter_plot.html">enrich_scatter_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="hmdb_pathway_enrichment_files/figure-html/unnamed-chunk-9-1.png" width="100%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/enrich_network.html">enrich_network</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
+<p><img src="hmdb_pathway_enrichment_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

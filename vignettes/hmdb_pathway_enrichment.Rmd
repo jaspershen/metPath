@@ -28,8 +28,68 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r setup}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metPath)
+```
+
+
+
+## **Load HMDB pathway database**
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+data("hmdb_pathway", package = "metPath")
+hmdb_pathway
+```
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+get_pathway_class(hmdb_pathway)
+```
+
+## **Pathway enrichment**
+
+We use the demo compound list from `metPath`.
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+data("query_id_hmdb", package = "metPath")
+query_id_hmdb
+```
+
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+result = 
+enrich_hmdb(query_id = query_id_hmdb, 
+            query_type = "compound", 
+            id_type = "HMDB",
+            pathway_database = hmdb_pathway,
+            only_primary_pathway = TRUE,
+            p_cutoff = 0.05, 
+            p_adjust_method = "BH", 
+            threads = 3)
+```
+
+Check the result:
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+result
+```
+
+
+## **Plot to show Pathway enrichment**
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+enrich_bar_plot(
+  object = result,
+  x_axis = "p_value_adjust",
+  cutoff = 0.05,
+  top = 10
+)
+```
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+enrich_scatter_plot(object = result)
+```
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+enrich_network(object = result)
 ```
 
 
